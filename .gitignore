@@ -40,3 +40,4 @@ build/
 
 # Hibernate local config (DO NOT PUSH)
 src/main/resources/hibernate.cfg.xml
+src/main/resources/db.properties
