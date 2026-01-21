@@ -34,7 +34,43 @@ public class StudentManager {
 
         StudentDataManagement studentDataManagement = new StudentDataManagement();
 
-        studentDataManagement.addStudent(s1);
+        studentDataManagement.addStudentToDataBase(s1);
         return true;
+    }
+
+    public void removeStudent(){
+        System.out.println("Enter Student Id : ");
+        Scanner scan = new Scanner(System.in);
+        String studentId = scan.next();
+        studentId = studentId.trim();
+        Student student = new Student();
+
+        StudentDataManagement studentDataManagement = new StudentDataManagement();
+        student = studentDataManagement.getStudentFromDataBase(studentId);
+        studentDataManagement.deleteStudentFromDataBase(studentId);
+
+
+        if(student == null){
+            System.out.println("No sudent available ");
+            return;
+        }
+        System.out.println("Student Remvoved : " + student);
+    }
+
+    public void getStudent(){
+        System.out.println("Enter student Id : ");
+        Scanner scan = new Scanner(System.in);
+        String id = scan.next();
+        id = id.trim();
+
+        StudentDataManagement studentDataManagement = new StudentDataManagement();
+        Student student = new Student();
+        student = studentDataManagement.getStudentFromDataBase(id);
+        if(student == null){
+            System.out.println("No Student Available with id : " + id);
+            return;
+        }
+
+        System.out.println(student);
     }
 }
