@@ -57,7 +57,7 @@ public class StudentManager {
         System.out.println("Student Remvoved : " + student);
     }
 
-    public void getStudent(){
+    public Student  getStudent(){
         System.out.println("Enter student Id : ");
         Scanner scan = new Scanner(System.in);
         String id = scan.next();
@@ -68,9 +68,46 @@ public class StudentManager {
         student = studentDataManagement.getStudentFromDataBase(id);
         if(student == null){
             System.out.println("No Student Available with id : " + id);
-            return;
+            return null;
         }
 
         System.out.println(student);
+        return student;
+    }
+
+    public void updateStudent(){
+
+        Student student = getStudent();
+        if(student == null){
+            System.out.println("Student does not present try again with correct id ");
+            return;
+        }
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println( "Enter updated details : ");
+        System.out.println("Name: ");
+        String name = scan.next();
+        System.out.println("Course: ");
+        String course = scan.next();
+        System.out.println("Age: ");
+        int age = scan.nextInt();
+        System.out.println("Marks: ");
+        int marks = scan.nextInt();
+
+        student.setsName(name);
+        student.setsAge(age);
+        student.setsMarks(marks);
+        student.setsCourse(course);
+
+        StudentDataManagement studentDataManagement = new StudentDataManagement();
+        studentDataManagement.updateStudentInDataBase(student);
+
+        System.out.println("Updated Student : " + student);
+
+
+
+
+
+
     }
 }
