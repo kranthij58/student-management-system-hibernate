@@ -1,6 +1,43 @@
 package org.Kranthi;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+class StudentsDetailsCollection {
+
+    public static String getStudentIdFromUser(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter student Id : ");
+        String studentId = scan.next();
+        return studentId;
+    }
+
+    public static String getStudentNameFromUser(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter student Name : ");
+        String  studentName = scan.next();
+        return studentName;
+    }
+
+    public static int getStudentAgeFromUser(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter student age : ");
+        int studentAge= scan.nextInt();
+        return studentAge;
+    }
+
+    public static int getStudentMarksFromUser(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter student marks : ");
+        int studentMarks= scan.nextInt();
+        return studentMarks;
+    }
+
+
+
+
+}
 
 public class StudentManager {
 
@@ -10,26 +47,36 @@ public class StudentManager {
         String roll;
         int age;
         int marks;
-        String course;
 
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter name : ");
-        name = scan.next();
-        System.out.println("Enter RollNo : ");
-        roll = scan.next();
-        System.out.println("Enter age : ");
-        age = scan.nextInt();
-        System.out.println("Enter marks : ");
-        marks = scan.nextInt();
-        System.out.println("Enter course : ");
-        course = scan.next();
+
+
+        name = StudentsDetailsCollection.getStudentNameFromUser();
+
+        roll = StudentsDetailsCollection.getStudentIdFromUser();
+
+        age = StudentsDetailsCollection.getStudentAgeFromUser();
+
+        marks = StudentsDetailsCollection.getStudentMarksFromUser();
+
+        CoursesDataManagement cdm = new CoursesDataManagement();
+
+        Course java = cdm.getCourseFromDataBase("C101");
+        Course spring = cdm.getCourseFromDataBase("C102");
+
+
+        List<Course> courseList = new ArrayList<>();
+        courseList.add(java);
+        courseList.add(spring);
 
         Student s1 = new Student();
         s1.setsName(name);
         s1.setsRoll(roll);
         s1.setsMarks(marks);
         s1.setsAge(age);
-        s1.setsCourse(course);
+        s1.setCourses(courseList);
+
+
+
 
 
         StudentDataManagement studentDataManagement = new StudentDataManagement();
@@ -39,9 +86,8 @@ public class StudentManager {
     }
 
     public void removeStudent(){
-        System.out.println("Enter Student Id : ");
-        Scanner scan = new Scanner(System.in);
-        String studentId = scan.next();
+
+        String studentId =StudentsDetailsCollection.getStudentIdFromUser();
         studentId = studentId.trim();
         Student student = new Student();
 
@@ -58,9 +104,8 @@ public class StudentManager {
     }
 
     public Student  getStudent(){
-        System.out.println("Enter student Id : ");
-        Scanner scan = new Scanner(System.in);
-        String id = scan.next();
+
+        String id = StudentsDetailsCollection.getStudentIdFromUser();
         id = id.trim();
 
         StudentDataManagement studentDataManagement = new StudentDataManagement();
@@ -83,21 +128,46 @@ public class StudentManager {
             return;
         }
 
-        Scanner scan = new Scanner(System.in);
+
         System.out.println( "Enter updated details : ");
-        System.out.println("Name: ");
-        String name = scan.next();
-        System.out.println("Course: ");
-        String course = scan.next();
-        System.out.println("Age: ");
-        int age = scan.nextInt();
-        System.out.println("Marks: ");
-        int marks = scan.nextInt();
+
+        String name = StudentsDetailsCollection.getStudentNameFromUser();
+
+
+        int age = StudentsDetailsCollection.getStudentAgeFromUser();
+
+        int marks = StudentsDetailsCollection.getStudentAgeFromUser();
 
         student.setsName(name);
         student.setsAge(age);
         student.setsMarks(marks);
-        student.setsCourse(course);
+
+
+
+        CoursesDataManagement cdm = new CoursesDataManagement();
+
+        Course java = cdm.getCourseFromDataBase("C101");
+        Course spring = cdm.getCourseFromDataBase("C102");
+
+        List<Course> updatedCourses = new ArrayList<>();
+        updatedCourses.add(java);
+        updatedCourses.add(spring);
+
+
+        student.setsName(name);
+        student.setsAge(age);
+        student.setsMarks(marks);
+        student.setCourses(updatedCourses);
+
+
+
+
+
+        StudentDataManagement sdm = new StudentDataManagement();
+        sdm.updateStudentInDataBase(student);
+
+        System.out.println("Updated Student : " + student);
+
 
         StudentDataManagement studentDataManagement = new StudentDataManagement();
         studentDataManagement.updateStudentInDataBase(student);

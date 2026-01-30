@@ -1,9 +1,8 @@
 package org.Kranthi;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "StudentTable")
@@ -14,8 +13,26 @@ public class Student {
     @Id
     private String sRoll;
     private int sAge;
-    private String sCourse;
     private int sMarks;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+
+    List<Course> courses;
+
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
 
 
     public String getsName() {
@@ -28,7 +45,6 @@ public class Student {
                 "sName='" + sName + '\'' +
                 ", sRoll='" + sRoll + '\'' +
                 ", sAge=" + sAge +
-                ", sCourse=" + sCourse +
                 ", sMarks=" + sMarks +
                 '}';
     }
@@ -53,13 +69,7 @@ public class Student {
         this.sAge = sAge;
     }
 
-    public String getsCourse() {
-        return sCourse;
-    }
 
-    public void setsCourse(String sCourse) {
-        this.sCourse = sCourse;
-    }
 
     public int getsMarks() {
         return sMarks;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-class DetailsCollection {
+class CourseDetailsCollection {
 
     public static String getCourseIdFromUser(){
         Scanner scan = new Scanner(System.in);
@@ -55,7 +55,7 @@ public class CourseManager {
     public Course getCourse(){
 
         CoursesDataManagement coursesDataManagement = new CoursesDataManagement();
-        String courseId = DetailsCollection.getCourseIdFromUser();
+        String courseId = CourseDetailsCollection.getCourseIdFromUser();
         Course course = coursesDataManagement.getCourseFromDataBase(courseId);
         if(course == null){
             System.out.println(" There is no course with this ID : ");
@@ -69,7 +69,7 @@ public class CourseManager {
     public void addCouse(){
 
 
-        String courseId = DetailsCollection.getCourseIdFromUser();
+        String courseId = CourseDetailsCollection.getCourseIdFromUser();
         CoursesDataManagement coursesDataManagement = new CoursesDataManagement();
 
         Course course = new Course();
@@ -81,9 +81,9 @@ public class CourseManager {
         }
 
         course.setCourseId(courseId);
-        course.setCourseName(DetailsCollection.getCourseNameFromUser());
-        course.setCourseCost(DetailsCollection.getCourseCostFromUser());
-        course.setTechologiesProvided(DetailsCollection.getCourseTechnologiesFromUser());
+        course.setCourseName(CourseDetailsCollection.getCourseNameFromUser());
+        course.setCourseCost(CourseDetailsCollection.getCourseCostFromUser());
+        course.setTechologiesProvided(CourseDetailsCollection.getCourseTechnologiesFromUser());
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -102,7 +102,7 @@ public class CourseManager {
 
 
         CoursesDataManagement coursesDataManagement = new CoursesDataManagement();
-        String courseId = DetailsCollection.getCourseIdFromUser();
+        String courseId = CourseDetailsCollection.getCourseIdFromUser();
         Course course = coursesDataManagement.getCourseFromDataBase(courseId);
         if(course == null){
             return;
@@ -122,7 +122,7 @@ public class CourseManager {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         System.out.println("Enter course details for updating : ");
-        String courseId = DetailsCollection.getCourseIdFromUser();
+        String courseId = CourseDetailsCollection.getCourseIdFromUser();
         CoursesDataManagement coursesDataManagement = new CoursesDataManagement();
 
         Course course = coursesDataManagement.getCourseFromDataBase(courseId);
@@ -135,10 +135,10 @@ public class CourseManager {
             }
         }
         Course updatedCourse = new Course();
-        updatedCourse.setCourseId(DetailsCollection.getCourseIdFromUser());
-        updatedCourse.setCourseName(DetailsCollection.getCourseNameFromUser());
-        updatedCourse.setCourseCost(DetailsCollection.getCourseCostFromUser());
-        updatedCourse.setTechologiesProvided(DetailsCollection.getCourseTechnologiesFromUser());
+        updatedCourse.setCourseId(CourseDetailsCollection.getCourseIdFromUser());
+        updatedCourse.setCourseName(CourseDetailsCollection.getCourseNameFromUser());
+        updatedCourse.setCourseCost(CourseDetailsCollection.getCourseCostFromUser());
+        updatedCourse.setTechologiesProvided(CourseDetailsCollection.getCourseTechnologiesFromUser());
 
         session.merge(updatedCourse);
         transaction.commit();

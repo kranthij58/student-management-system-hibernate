@@ -3,17 +3,29 @@ package org.Kranthi;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
 @Entity
-
+@Table(name = "courses")
 public class Course {
     @Id
     String courseId;
     String courseName;
     int courseCost;
     List<String>  techologiesProvided;
+
+    @ManyToMany(mappedBy = "courses")
+    List<Student> students;
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
     public String getCourseId() {
         return courseId;
@@ -46,17 +58,16 @@ public class Course {
     public void setTechologiesProvided(List<String> techologiesProvided) {
         this.techologiesProvided = techologiesProvided;
     }
-//    @ManyToMany
-//    List<Student> students;
 
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseId='" + courseId + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", courseCost=" + courseCost +
-                ", techologiesProvided=" + techologiesProvided +
-                '}';
-    }
+
+   // @Override
+//    public String toString() {
+//        return "Course{" +
+//                "courseId='" + courseId + '\'' +
+//                ", courseName='" + courseName + '\'' +
+//                ", courseCost=" + courseCost +
+//                ", techologiesProvided=" + techologiesProvided +
+//                '}';
+//    }
 }
