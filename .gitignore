@@ -42,3 +42,7 @@ build/
 hibernate.cfg.xml
 src/main/resources/hibernate.cfg.xml
 src/main/resources/db.properties
+
+# IntelliJ IDEA
+.idea/
+*.iml
